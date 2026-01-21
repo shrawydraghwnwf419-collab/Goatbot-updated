@@ -5,14 +5,14 @@ module.exports = {
     name: "4o",
     aliases: ["gpt4o", "dalle4o"],
     version: "1.0",
-    author: "Neoaz ゐ", //API by RIFAT
+    author: "Neoaz ゐ", //API بواسطة RIFAT
     countDown: 10,
     role: 0,
-    shortDescription: { en: "Generate AI image with 4o" },
-    longDescription: { en: "Generate images using 4o AI model" },
+    shortDescription: { ar: "توليد صورة بالذكاء الاصطناعي باستخدام 4o" },
+    longDescription: { ar: "توليد الصور باستخدام نموذج الذكاء الاصطناعي 4o" },
     category: "image",
     guide: {
-      en: "{pn} <prompt>"
+      ar: "{pn} <الوصف>"
     }
   },
 
@@ -20,7 +20,7 @@ module.exports = {
     const hasPrompt = args.length > 0;
 
     if (!hasPrompt) {
-      return message.reply("Please provide a prompt.");
+      return message.reply("يرجى إدخال وصف للصورة.");
     }
 
     const prompt = args.join(" ").trim();
@@ -39,20 +39,20 @@ module.exports = {
 
       if (!resultUrl) {
         api.setMessageReaction("❌", event.messageID, () => {}, true);
-        return message.reply("Failed to generate image.");
+        return message.reply("فشل في توليد الصورة.");
       }
 
       api.setMessageReaction("✅", event.messageID, () => {}, true);
 
       await message.reply({
-        body: "Image generated 🐦",
+        body: "تم توليد الصورة 🐦",
         attachment: await global.utils.getStreamFromURL(resultUrl)
       });
 
     } catch (err) {
       console.error(err);
       api.setMessageReaction("❌", event.messageID, () => {}, true);
-      return message.reply("Error while generating image.");
+      return message.reply("حدث خطأ أثناء توليد الصورة.");
     }
   }
 };
